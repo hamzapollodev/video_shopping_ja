@@ -219,6 +219,7 @@ class _VideoShopFlutterState extends State<VideoShopFlutter> {
     }
     return PageView.builder(
       physics: const AlwaysScrollableScrollPhysics(),
+      allowImplicitScrolling: true,
       controller: _pageController,
       scrollDirection: Axis.vertical,
       itemCount: widget.listData.length,
