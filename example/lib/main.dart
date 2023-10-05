@@ -3,6 +3,8 @@ import 'package:example/widgets/like_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:video_shop_flutter/page/page.dart';
 
+import 'data/video_data.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -43,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void didChangeDependencies() async {
-    List<Map<String, dynamic>> response = await service.mapData(1, 4);
+    List<Map<String, dynamic>> response = playList;
     setState(() {
       data = response;
     });

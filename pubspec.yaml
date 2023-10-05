@@ -8,9 +8,9 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  cached_video_player: ^2.0.4
   flutter:
     sdk: flutter
-  video_player: ^2.4.7
   visibility_detector: ^0.3.3
 
 

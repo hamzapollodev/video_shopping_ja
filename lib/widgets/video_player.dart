@@ -1,10 +1,10 @@
+import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoPlayerApp extends StatefulWidget {
   /// Create video player.
   const VideoPlayerApp({Key? key, required this.controller}) : super(key: key);
-  final VideoPlayerController controller;
+  final CachedVideoPlayerController controller;
   @override
   State<VideoPlayerApp> createState() => _VideoPlayerAppState();
 }
@@ -64,7 +64,7 @@ class _VideoPlayerAppState extends State<VideoPlayerApp> {
                     child: SizedBox(
                       width: widget.controller.value.size.width,
                       height: widget.controller.value.size.height,
-                      child: VideoPlayer(widget.controller),
+                      child: CachedVideoPlayer(widget.controller),
                     ),
                   ),
                 ),
@@ -77,7 +77,7 @@ class _VideoPlayerAppState extends State<VideoPlayerApp> {
           aspectRatio: widget.controller.value.aspectRatio,
           child: Stack(
             children: [
-              VideoPlayer(widget.controller),
+              CachedVideoPlayer(widget.controller),
               if (_showPause) const PauseIcon(),
             ],
           ),
