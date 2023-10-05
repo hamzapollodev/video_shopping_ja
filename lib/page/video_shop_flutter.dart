@@ -188,7 +188,7 @@ class _VideoShopFlutterState extends State<VideoShopFlutter> {
 
   @override
   void initState() {
-    _pageController = PageController(initialPage: widget.lastSeenPage ?? 0);
+    _pageController = PageController(initialPage: widget.lastSeenPage ?? 0, viewportFraction: 0.99);
     super.initState();
   }
 
@@ -217,29 +217,28 @@ class _VideoShopFlutterState extends State<VideoShopFlutter> {
             ),
           ));
     }
-    return PageView(
+    return PageView.builder(
+      physics: const AlwaysScrollableScrollPhysics(),
       controller: _pageController,
       scrollDirection: Axis.vertical,
-      children: List.generate(
-        widget.listData.length,
-        (index) => VideoPage(
-          enableBackgroundContent: widget.enableBackgroundContent,
-          updateLastSeenPage: widget.updateLastSeenPage,
-          video: VideoModel.fromJson(widget.listData[index]),
-          customVideoInfo: widget.customVideoInfo,
-          followWidget: widget.followWidget,
-          likeWidget: widget.likeWidget,
-          commentWidget: widget.commentWidget,
-          shareWidget: widget.shareWidget,
-          buyWidget: widget.buyWidget,
-          videoWatched: widget.videoWatched,
-          actionsAlign: widget.actionsAlign,
-          actionsPadding: widget.actionsPadding,
-          informationAlign: widget.informationAlign,
-          informationPadding: widget.informationPadding,
-          viewWidget: widget.viewWidget,
-          index: index,
-        ),
+      itemCount: widget.listData.length,
+      itemBuilder: (BuildContext context, int index) => VideoPage(
+        enableBackgroundContent: widget.enableBackgroundContent,
+        updateLastSeenPage: widget.updateLastSeenPage,
+        video: VideoModel.fromJson(widget.listData[index]),
+        customVideoInfo: widget.customVideoInfo,
+        followWidget: widget.followWidget,
+        likeWidget: widget.likeWidget,
+        commentWidget: widget.commentWidget,
+        shareWidget: widget.shareWidget,
+        buyWidget: widget.buyWidget,
+        videoWatched: widget.videoWatched,
+        actionsAlign: widget.actionsAlign,
+        actionsPadding: widget.actionsPadding,
+        informationAlign: widget.informationAlign,
+        informationPadding: widget.informationPadding,
+        viewWidget: widget.viewWidget,
+        index: index,
       ),
     );
   }
