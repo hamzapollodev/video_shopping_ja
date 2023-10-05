@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 import 'package:video_shop_flutter/model/video_model.dart';
 import 'package:video_shop_flutter/page/video_page.dart';
 
@@ -73,6 +74,7 @@ class VideoShopFlutter extends StatefulWidget {
     this.actionsAlign,
     this.updateLastSeenPage,
     this.enableBackgroundContent,
+    this.preloadPagesCount = 1,
   }) : super(key: key);
 
   /// Index of last seen page.
@@ -178,17 +180,22 @@ class VideoShopFlutter extends StatefulWidget {
   /// if value is null or false, background is hidden
   final bool? enableBackgroundContent;
 
+  /// An integer value that determines number pages that will be preloaded.
+  ///
+  /// [preloadPagesCount] value start from 0, default 1
+  final int preloadPagesCount;
+
   @override
   State<VideoShopFlutter> createState() => _VideoShopFlutterState();
 }
 
 class _VideoShopFlutterState extends State<VideoShopFlutter> {
-  late PageController _pageController;
+  late PreloadPageController _pageController;
   int currentPage = 0;
 
   @override
   void initState() {
-    _pageController = PageController(initialPage: widget.lastSeenPage ?? 0, viewportFraction: 0.99);
+    _pageController = PreloadPageController(initialPage: widget.lastSeenPage ?? 0, viewportFraction: 0.99);
     super.initState();
   }
 
@@ -217,12 +224,12 @@ class _VideoShopFlutterState extends State<VideoShopFlutter> {
             ),
           ));
     }
-    return PageView.builder(
+    return PreloadPageView.builder(
       physics: const AlwaysScrollableScrollPhysics(),
-      allowImplicitScrolling: true,
       controller: _pageController,
       scrollDirection: Axis.vertical,
       itemCount: widget.listData.length,
+      preloadPagesCount: widget.preloadPagesCount,
       itemBuilder: (BuildContext context, int index) => VideoPage(
         enableBackgroundContent: widget.enableBackgroundContent,
         updateLastSeenPage: widget.updateLastSeenPage,
