@@ -11,6 +11,7 @@ class VideoPlayerApp extends StatefulWidget {
 
 class _VideoPlayerAppState extends State<VideoPlayerApp> {
   bool _showPause = false;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -32,6 +33,20 @@ class _VideoPlayerAppState extends State<VideoPlayerApp> {
           }
         }
       }
+
+      if (widget.controller.value.isBuffering) {
+        if (mounted) {
+          setState(() {
+            _isLoading = true;
+          });
+        }
+      } else {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
+      }
     });
     super.initState();
   }
@@ -41,7 +56,6 @@ class _VideoPlayerAppState extends State<VideoPlayerApp> {
     double screenRatio = MediaQuery.of(context).size.aspectRatio;
     return GestureDetector(
       onTap: () {
-        print("Gesss");
         if (widget.controller.value.isPlaying) {
           widget.controller.pause();
           setState(() {
@@ -68,7 +82,7 @@ class _VideoPlayerAppState extends State<VideoPlayerApp> {
                     ),
                   ),
                 ),
-                if (_showPause) const PauseIcon(),
+                _isLoading ? const PauseIcon(isLoading: true,) : _showPause ? const PauseIcon() : const SizedBox(),
               ],
             )
             )
@@ -78,7 +92,7 @@ class _VideoPlayerAppState extends State<VideoPlayerApp> {
           child: Stack(
             children: [
               CachedVideoPlayer(widget.controller),
-              if (_showPause) const PauseIcon(),
+              _isLoading ? const PauseIcon(isLoading: true,) : _showPause ? const PauseIcon() : const SizedBox(),
             ],
           ),
         ),
@@ -88,8 +102,9 @@ class _VideoPlayerAppState extends State<VideoPlayerApp> {
 }
 
 class PauseIcon extends StatelessWidget {
+  final bool isLoading;
   /// Create pause icon.
-  const PauseIcon({Key? key}) : super(key: key);
+  const PauseIcon({Key? key, this.isLoading = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +118,7 @@ class PauseIcon extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         child: Center(
-          child: Icon(Icons.play_arrow,
+          child: isLoading ? CircularProgressIndicator(color: Colors.white.withOpacity(0.5),) : Icon(Icons.play_arrow,
               color: Colors.white.withOpacity(0.5), size: 40),
         ),
       ),
