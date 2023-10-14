@@ -10,6 +10,7 @@ class ActionsToolbar extends StatelessWidget {
   final Widget Function(VideoModel? video)? shareWidget;
   final Widget Function(VideoModel? video)? buyWidget;
   final Widget Function(VideoModel? video, int index)? viewWidget;
+  final Widget Function(VideoModel? video, int index)? viewMoreWidget;
   final bool? enableBackgroundContent;
   final int index;
 
@@ -23,6 +24,7 @@ class ActionsToolbar extends StatelessWidget {
       required this.shareWidget,
       required this.buyWidget,
       required this.viewWidget,
+      required this.viewMoreWidget,
       required this.index,
       this.enableBackgroundContent});
 
@@ -68,6 +70,9 @@ class ActionsToolbar extends StatelessWidget {
               ? buyWidget!(video)
               : _getSocialAction(
                   icon: Icons.shopping_cart_checkout_outlined, title: 'Buy'),
+          (viewMoreWidget != null)
+              ? viewMoreWidget!(video, index)
+              : const SizedBox.shrink(),
         ],
       ),
     );

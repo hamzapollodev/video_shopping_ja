@@ -38,6 +38,7 @@ class VideoPage extends StatelessWidget {
     required this.shareWidget,
     required this.buyWidget,
     required this.viewWidget,
+    required this.viewMoreWidget,
     this.informationPadding,
     required this.videoWatched,
     this.informationAlign,
@@ -56,6 +57,7 @@ class VideoPage extends StatelessWidget {
   final Widget Function(VideoModel? video)? shareWidget;
   final Widget Function(VideoModel? video)? buyWidget;
   final Widget Function(VideoModel? video, int index)? viewWidget;
+  final Widget Function(VideoModel? video, int index)? viewMoreWidget;
   final EdgeInsetsGeometry? informationPadding;
   final List<String> videoWatched;
   final AlignmentGeometry? informationAlign;
@@ -125,6 +127,7 @@ class VideoPage extends StatelessWidget {
                 shareWidget: shareWidget,
                 buyWidget: buyWidget,
                 viewWidget: viewWidget,
+                viewMoreWidget: viewMoreWidget,
                 index: index,
               ),
             ),

@@ -64,6 +64,7 @@ class VideoShopFlutter extends StatefulWidget {
     this.shareWidget,
     this.buyWidget,
     this.viewWidget,
+    this.viewMoreWidget,
     required this.pageSize,
     required this.loadMore,
     this.informationPadding,
@@ -173,6 +174,9 @@ class VideoShopFlutter extends StatefulWidget {
   /// Create action view product widget
   final Widget Function(VideoModel? video, int index)? viewWidget;
 
+  /// Create action view more product videos widget
+  final Widget Function(VideoModel? video, int index)? viewMoreWidget;
+
   /// On/Off background content.
   ///
   /// If `enableBackgroundContent = true` background is showed,
@@ -246,6 +250,7 @@ class _VideoShopFlutterState extends State<VideoShopFlutter> {
         informationAlign: widget.informationAlign,
         informationPadding: widget.informationPadding,
         viewWidget: widget.viewWidget,
+        viewMoreWidget: widget.viewMoreWidget,
         index: index,
       ),
     );
