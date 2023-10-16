@@ -143,7 +143,7 @@ class VideoShopFlutter extends StatefulWidget {
   final EdgeInsetsGeometry? informationPadding;
 
   /// Create video information widget.
-  final Widget Function(VideoModel? video)? customVideoInfo;
+  final Widget Function(VideoModel? video, int index)? customVideoInfo;
 
   /// Create follow action widget.
   final Widget Function(VideoModel? video)? followWidget;

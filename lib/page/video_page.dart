@@ -49,7 +49,7 @@ class VideoPage extends StatelessWidget {
     this.enableBackgroundContent = false,
   }) : super(key: key);
   final VideoModel video;
-  final Widget Function(VideoModel? video)? customVideoInfo;
+  final Widget Function(VideoModel? video, int index)? customVideoInfo;
   final Widget Function(VideoModel? video)? followWidget;
   final Widget Function(VideoModel? video, Function(int likes, bool liked))?
       likeWidget;
@@ -105,7 +105,7 @@ class VideoPage extends StatelessWidget {
               padding: informationPadding ??
                   const EdgeInsets.only(left: 20, bottom: 70),
               child: (customVideoInfo != null)
-                  ? customVideoInfo!(video)
+                  ? customVideoInfo!(video, index)
                   : VideoInformation(
                       video.user ?? "",
                       video.videoTitle ?? "",
