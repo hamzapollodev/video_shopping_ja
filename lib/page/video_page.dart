@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:video_shop_flutter/video_shop_flutter.dart';
+import 'package:video_shopping_flutter/video_shop_flutter.dart';
 
 final List<Color> gradientBackground = [
   const Color(0xff000000).withOpacity(0.9),
@@ -51,8 +51,7 @@ class VideoPage extends StatelessWidget {
   final VideoModel video;
   final Widget Function(VideoModel? video, int index)? customVideoInfo;
   final Widget Function(VideoModel? video)? followWidget;
-  final Widget Function(VideoModel? video, Function(int likes, bool liked))?
-      likeWidget;
+  final Widget Function(VideoModel? video, Function(int likes, bool liked))? likeWidget;
   final Widget Function(VideoModel? video)? commentWidget;
   final Widget Function(VideoModel? video)? shareWidget;
   final Widget Function(VideoModel? video)? buyWidget;
@@ -102,8 +101,7 @@ class VideoPage extends StatelessWidget {
           Align(
             alignment: informationAlign ?? Alignment.bottomLeft,
             child: Padding(
-              padding: informationPadding ??
-                  const EdgeInsets.only(left: 20, bottom: 70),
+              padding: informationPadding ?? const EdgeInsets.only(left: 20, bottom: 70),
               child: (customVideoInfo != null)
                   ? customVideoInfo!(video, index)
                   : VideoInformation(

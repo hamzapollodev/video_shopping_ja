@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:preload_page_view/preload_page_view.dart';
-import 'package:video_shop_flutter/model/video_model.dart';
-import 'package:video_shop_flutter/page/video_page.dart';
+import 'package:video_shopping_flutter/model/video_model.dart';
+import 'package:video_shopping_flutter/page/video_page.dart';
 
 class VideoShopFlutter extends StatefulWidget {
   /// Create Video Player Layout Like Tiktok.
@@ -159,8 +159,7 @@ class VideoShopFlutter extends StatefulWidget {
   /// first is total likes, second is liked status (true or false)
   ///
   /// this function need be called when total likes or liked status be changed
-  final Widget Function(VideoModel? video, Function(int likes, bool liked))?
-      likeWidget;
+  final Widget Function(VideoModel? video, Function(int likes, bool liked))? likeWidget;
 
   /// Create action comment widget.
   final Widget Function(VideoModel? video)? commentWidget;

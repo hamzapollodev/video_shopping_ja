@@ -1,7 +1,7 @@
 import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:video_shop_flutter/model/video_model.dart';
-import 'package:video_shop_flutter/widgets/video_player.dart';
+import 'package:video_shopping_flutter/model/video_model.dart';
+import 'package:video_shopping_flutter/widgets/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class VideoItem extends StatefulWidget {
@@ -25,10 +25,10 @@ class _VideoItemState extends State<VideoItem> {
   CachedVideoPlayerController? _videoController;
 
   @override
-  void dispose() async{
+  void dispose() async {
     super.dispose();
-    if(_videoController != null){
-      if(_videoController!.value.isPlaying){
+    if (_videoController != null) {
+      if (_videoController!.value.isPlaying) {
         _videoController!.pause();
       }
     }
@@ -56,9 +56,9 @@ class _VideoItemState extends State<VideoItem> {
                   }
                 }
               }
-              if(visibleInfo.visibleFraction == 0){
-                if(_videoController != null){
-                  if(_videoController!.value.isPlaying){
+              if (visibleInfo.visibleFraction == 0) {
+                if (_videoController != null) {
+                  if (_videoController!.value.isPlaying) {
                     _videoController!.pause();
                   }
                 }
@@ -93,13 +93,12 @@ class _VideoItemState extends State<VideoItem> {
             ),
             onVisibilityChanged: (info) {
               if (info.visibleFraction > 0.6) {
-                _videoController =
-                    CachedVideoPlayerController.network(widget.video.url)
-                      ..initialize().then(
-                        (_) {
-                          setState(() {});
-                        },
-                      );
+                _videoController = CachedVideoPlayerController.network(widget.video.url)
+                  ..initialize().then(
+                    (_) {
+                      setState(() {});
+                    },
+                  );
               }
             },
           );
