@@ -1,49 +1,74 @@
 class VideoModel {
   int? id;
-  String? user;
-  String? userPic;
-  String? videoTitle;
-  String? songName;
-  int? likes;
-  String? comments;
-  String? videoDescription;
   String url;
   String? thumbnail;
-  bool liked;
+  String? videoTitle;
   String? productName;
   String? productPermalink;
   String? stockStatus;
+  int? likes;
+  bool? liked;
+  String? description;
+  int? productId;
+  int? storeId;
+  String? image;
+  List<dynamic>? attributes;
+  Deal? deal;
 
   VideoModel({
     this.id,
-    this.user,
-    this.userPic,
-    this.videoTitle,
-    this.songName,
-    this.likes,
-    this.comments,
-    this.videoDescription,
-    this.thumbnail,
     required this.url,
-    this.liked = false,
+    this.thumbnail,
+    this.videoTitle,
     this.productName,
     this.productPermalink,
-    this.stockStatus = 'instock',
+    this.stockStatus,
+    this.likes,
+    this.liked,
+    this.description,
+    this.productId,
+    this.storeId,
+    this.image,
+    this.attributes,
+    this.deal,
   });
 
-  VideoModel.fromJson(Map<dynamic, dynamic> json)
-      : id = json['id'],
-        user = json['user'],
-        userPic = json['user_pic'],
-        videoTitle = json['video_title'],
-        songName = json['song_name'],
-        likes = json['likes'],
-        comments = json['comments'],
-        url = json['url'],
-        thumbnail = json['thumbnail'],
-        videoDescription = json['description'],
-        liked = json['liked'] ?? false,
-        productName = json['product_name'],
-        productPermalink = json['product_permalink'],
-        stockStatus = json['stock_status'];
+  factory VideoModel.fromJson(Map<String, dynamic> json) => VideoModel(
+        id: json["id"],
+        url: json["url"],
+        thumbnail: json["thumbnail"],
+        videoTitle: json["video_title"],
+        productName: json["product_name"],
+        productPermalink: json["product_permalink"],
+        stockStatus: json["stock_status"],
+        likes: json["likes"],
+        liked: json["liked"],
+        description: json["description"],
+        productId: json["product_id"],
+        storeId: json["store_id"],
+        image: json["image"],
+        attributes: json["attributes"] == null ? [] : List<dynamic>.from(json["attributes"]!.map((x) => x)),
+        deal: json["deal"] == null ? null : Deal.fromJson(json["deal"]),
+      );
+}
+
+class Deal {
+  int? dealId;
+  String? price;
+  String? regularPrice;
+  String? stockStatus;
+
+  Deal({
+    this.dealId,
+    this.price,
+    this.regularPrice,
+    this.stockStatus,
+  });
+
+  factory Deal.fromJson(Map<String, dynamic> json) => Deal(
+        dealId: json["deal_id"],
+        price: json["price"],
+        regularPrice: json["regular_price"],
+        stockStatus: json["stock_status"],
+      );
 }

@@ -105,9 +105,9 @@ class VideoPage extends StatelessWidget {
               child: (customVideoInfo != null)
                   ? customVideoInfo!(video, index)
                   : VideoInformation(
-                      video.user ?? "",
                       video.videoTitle ?? "",
-                      video.videoDescription ?? "",
+                      video.videoTitle ?? "",
+                      video.description ?? "",
                     ),
             ),
           ),
