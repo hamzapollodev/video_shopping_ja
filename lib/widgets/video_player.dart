@@ -1,10 +1,10 @@
-import 'package:cached_video_player/cached_video_player.dart';
+import 'package:cached_video_player_plus/cached_video_player_plus.dart';
 import 'package:flutter/material.dart';
 
 class VideoPlayerApp extends StatefulWidget {
   /// Create video player.
   const VideoPlayerApp({Key? key, required this.controller}) : super(key: key);
-  final CachedVideoPlayerController controller;
+  final CachedVideoPlayerPlusController controller;
   @override
   State<VideoPlayerApp> createState() => _VideoPlayerAppState();
 }
@@ -16,17 +16,17 @@ class _VideoPlayerAppState extends State<VideoPlayerApp> {
   @override
   void initState() {
     widget.controller.addListener(() {
-      if(widget.controller.value.isPlaying){
-        if(_showPause){
-          if(mounted){
+      if (widget.controller.value.isPlaying) {
+        if (_showPause) {
+          if (mounted) {
             setState(() {
               _showPause = false;
             });
           }
         }
-      }else{
-        if(!_showPause){
-          if(mounted){
+      } else {
+        if (!_showPause) {
+          if (mounted) {
             setState(() {
               _showPause = true;
             });
@@ -71,38 +71,50 @@ class _VideoPlayerAppState extends State<VideoPlayerApp> {
       child: (widget.controller.value.aspectRatio < screenRatio)
           ? AbsorbPointer(
               child: Stack(
-                children: [
+              children: [
                 SizedBox.expand(
                   child: FittedBox(
                     fit: BoxFit.cover,
                     child: SizedBox(
                       width: widget.controller.value.size.width,
                       height: widget.controller.value.size.height,
-                      child: CachedVideoPlayer(widget.controller),
+                      child: CachedVideoPlayerPlus(widget.controller),
                     ),
                   ),
                 ),
-                _isLoading ? const PauseIcon(isLoading: true,) : _showPause ? const PauseIcon() : const SizedBox(),
+                _isLoading
+                    ? const PauseIcon(
+                        isLoading: true,
+                      )
+                    : _showPause
+                        ? const PauseIcon()
+                        : const SizedBox(),
               ],
-            )
-            )
+            ))
           : AbsorbPointer(
               child: AspectRatio(
-          aspectRatio: widget.controller.value.aspectRatio,
-          child: Stack(
-            children: [
-              CachedVideoPlayer(widget.controller),
-              _isLoading ? const PauseIcon(isLoading: true,) : _showPause ? const PauseIcon() : const SizedBox(),
-            ],
-          ),
-        ),
-          ),
+                aspectRatio: widget.controller.value.aspectRatio,
+                child: Stack(
+                  children: [
+                    CachedVideoPlayerPlus(widget.controller),
+                    _isLoading
+                        ? const PauseIcon(
+                            isLoading: true,
+                          )
+                        : _showPause
+                            ? const PauseIcon()
+                            : const SizedBox(),
+                  ],
+                ),
+              ),
+            ),
     );
   }
 }
 
 class PauseIcon extends StatelessWidget {
   final bool isLoading;
+
   /// Create pause icon.
   const PauseIcon({Key? key, this.isLoading = false}) : super(key: key);
 
@@ -118,8 +130,11 @@ class PauseIcon extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         child: Center(
-          child: isLoading ? CircularProgressIndicator(color: Colors.white.withOpacity(0.5),) : Icon(Icons.play_arrow,
-              color: Colors.white.withOpacity(0.5), size: 40),
+          child: isLoading
+              ? CircularProgressIndicator(
+                  color: Colors.white.withOpacity(0.5),
+                )
+              : Icon(Icons.play_arrow, color: Colors.white.withOpacity(0.5), size: 40),
         ),
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:cached_video_player/cached_video_player.dart';
+import 'package:cached_video_player_plus/cached_video_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:video_shopping_flutter/model/video_model.dart';
 import 'package:video_shopping_flutter/widgets/video_player.dart';
@@ -22,7 +22,7 @@ class VideoItem extends StatefulWidget {
 }
 
 class _VideoItemState extends State<VideoItem> {
-  CachedVideoPlayerController? _videoController;
+  CachedVideoPlayerPlusController? _videoController;
 
   @override
   void dispose() async {
@@ -93,7 +93,7 @@ class _VideoItemState extends State<VideoItem> {
             ),
             onVisibilityChanged: (info) {
               if (info.visibleFraction > 0.6) {
-                _videoController = CachedVideoPlayerController.network(widget.video.url)
+                _videoController = CachedVideoPlayerPlusController.networkUrl(Uri.parse(widget.video.url))
                   ..initialize().then(
                     (_) {
                       setState(() {});
