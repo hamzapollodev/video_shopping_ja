@@ -25,6 +25,25 @@ class _VideoItemState extends State<VideoItem> {
   CachedVideoPlayerPlusController? _videoController;
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize video controller immediately for preloading
+    _initializeVideoController();
+  }
+
+  Future<void> _initializeVideoController() async {
+    try {
+      _videoController = CachedVideoPlayerPlusController.networkUrl(Uri.parse(widget.video.url));
+      await _videoController!.initialize();
+      if (mounted) {
+        setState(() {});
+      }
+    } catch (e) {
+      print('Error initializing video controller: $e');
+    }
+  }
+
+  @override
   void dispose() async {
     super.dispose();
     if (_videoController != null) {
@@ -92,14 +111,8 @@ class _VideoItemState extends State<VideoItem> {
               fit: BoxFit.fitWidth,
             ),
             onVisibilityChanged: (info) {
-              if (info.visibleFraction > 0.6) {
-                _videoController = CachedVideoPlayerPlusController.networkUrl(Uri.parse(widget.video.url))
-                  ..initialize().then(
-                    (_) {
-                      setState(() {});
-                    },
-                  );
-              }
+              // Video controller is now initialized in initState
+              // This callback is kept for potential future use
             },
           );
   }
