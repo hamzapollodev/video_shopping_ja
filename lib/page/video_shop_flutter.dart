@@ -77,6 +77,7 @@ class VideoShopFlutter extends StatefulWidget {
     this.enableBackgroundContent,
     this.preloadPagesCount = 1,
     this.emptyStateWidget,
+    this.loading = false,
   }) : super(key: key);
 
   /// Index of last seen page.
@@ -192,6 +193,9 @@ class VideoShopFlutter extends StatefulWidget {
   /// empty list of data widget
   final Widget? emptyStateWidget;
 
+  /// Loading state of video shop.
+  final bool loading;
+
   @override
   State<VideoShopFlutter> createState() => _VideoShopFlutterState();
 }
@@ -222,7 +226,16 @@ class _VideoShopFlutterState extends State<VideoShopFlutter> {
         }
       }
     });
-    if (widget.listData.isEmpty) {
+    if (widget.loading) {
+      return Container(
+        color: Colors.black,
+        child: const Center(
+          child: CupertinoActivityIndicator(
+            color: Colors.white,
+          ),
+        ),
+      );
+    } else if (widget.listData.isEmpty) {
       return widget.emptyStateWidget ??
           Container(
               color: Colors.black,
