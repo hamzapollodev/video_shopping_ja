@@ -13,7 +13,7 @@ class VideoModel {
   int? storeId;
   String? image;
   List<dynamic>? attributes;
-  Deal? deal;
+  Map<String, dynamic>? deal;
 
   VideoModel({
     this.id,
@@ -48,27 +48,6 @@ class VideoModel {
         storeId: json["store_id"],
         image: json["image"],
         attributes: json["attributes"] == null ? [] : List<dynamic>.from(json["attributes"]!.map((x) => x)),
-        deal: json["deal"] == null ? null : Deal.fromJson(json["deal"]),
-      );
-}
-
-class Deal {
-  int? dealId;
-  String? price;
-  String? regularPrice;
-  String? stockStatus;
-
-  Deal({
-    this.dealId,
-    this.price,
-    this.regularPrice,
-    this.stockStatus,
-  });
-
-  factory Deal.fromJson(Map<String, dynamic> json) => Deal(
-        dealId: json["deal_id"],
-        price: json["price"],
-        regularPrice: json["regular_price"],
-        stockStatus: json["stock_status"],
+        deal: json["deal"] == null ? null : Map<String, dynamic>.from(json["deal"]),
       );
 }
