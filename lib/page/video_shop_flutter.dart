@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 import 'package:video_shopping_flutter/model/video_model.dart';
 import 'package:video_shopping_flutter/page/video_page.dart';
+import 'package:video_shopping_flutter/widgets/optimized_video_page.dart';
 
 class VideoShopFlutter extends StatefulWidget {
   /// Create Video Player Layout Like Tiktok.
@@ -251,7 +252,9 @@ class _VideoShopFlutterState extends State<VideoShopFlutter> {
       scrollDirection: Axis.vertical,
       itemCount: widget.listData.length,
       preloadPagesCount: widget.preloadPagesCount,
-      itemBuilder: (BuildContext context, int index) => VideoPage(
+      itemBuilder: (BuildContext context, int index) => OptimizedVideoPage(
+        currentIndex: currentPage,
+        preloadDistance: widget.preloadPagesCount,
         enableBackgroundContent: widget.enableBackgroundContent,
         updateLastSeenPage: widget.updateLastSeenPage,
         video: VideoModel.fromJson(widget.listData[index]),
