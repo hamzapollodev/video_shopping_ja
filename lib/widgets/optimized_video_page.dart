@@ -24,6 +24,7 @@ class OptimizedVideoPage extends StatelessWidget {
     required this.preloadDistance,
     required this.updateLastSeenPage,
     this.enableBackgroundContent = false,
+    this.toolbarDecoration,
   }) : super(key: key);
 
   final VideoModel video;
@@ -45,6 +46,7 @@ class OptimizedVideoPage extends StatelessWidget {
   final int preloadDistance;
   final Function(int lastSeenPage)? updateLastSeenPage;
   final bool? enableBackgroundContent;
+  final BoxDecoration? toolbarDecoration;
 
   bool get shouldPreload {
     return (index - currentIndex).abs() <= preloadDistance;
@@ -113,6 +115,7 @@ class OptimizedVideoPage extends StatelessWidget {
                 viewWidget: viewWidget,
                 viewMoreWidget: viewMoreWidget,
                 index: index,
+                toolbarDecoration: toolbarDecoration,
               ),
             ),
           ),

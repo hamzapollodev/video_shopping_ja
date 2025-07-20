@@ -12,6 +12,7 @@ class ActionsToolbar extends StatelessWidget {
   final Widget Function(VideoModel? video, int index)? viewMoreWidget;
   final bool? enableBackgroundContent;
   final int index;
+  final BoxDecoration? toolbarDecoration;
 
   /// Create video actions bar.
   const ActionsToolbar(
@@ -25,20 +26,13 @@ class ActionsToolbar extends StatelessWidget {
       required this.viewWidget,
       required this.viewMoreWidget,
       required this.index,
+      this.toolbarDecoration,
       this.enableBackgroundContent});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: (enableBackgroundContent != null && enableBackgroundContent!)
-          ? BoxDecoration(
-              color: Colors.black.withOpacity(0.05),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(5),
-                bottomLeft: Radius.circular(5),
-              ),
-            )
-          : null,
+      decoration: (toolbarDecoration != null) ? toolbarDecoration : null,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -79,6 +79,7 @@ class VideoShopFlutter extends StatefulWidget {
     this.preloadPagesCount = 1,
     this.emptyStateWidget,
     this.loading = false,
+    this.toolbarDecoration,
   }) : super(key: key);
 
   /// Index of last seen page.
@@ -197,6 +198,9 @@ class VideoShopFlutter extends StatefulWidget {
   /// Loading state of video shop.
   final bool loading;
 
+  /// Optional decoration for the toolbar.
+  final BoxDecoration? toolbarDecoration;
+
   @override
   State<VideoShopFlutter> createState() => _VideoShopFlutterState();
 }
@@ -272,6 +276,7 @@ class _VideoShopFlutterState extends State<VideoShopFlutter> {
         viewWidget: widget.viewWidget,
         viewMoreWidget: widget.viewMoreWidget,
         index: index,
+        toolbarDecoration: widget.toolbarDecoration,
       ),
     );
   }
