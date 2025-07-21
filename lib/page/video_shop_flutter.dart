@@ -116,7 +116,7 @@ class VideoShopFlutter extends StatefulWidget {
   ///   'video_title': this is title of video'
   /// }
   /// ```
-  final List<Map<String, dynamic>> listData;
+  final List<VideoModel> listData;
 
   /// Your pageSize when you call get-list API.
   final int pageSize;
@@ -261,7 +261,7 @@ class _VideoShopFlutterState extends State<VideoShopFlutter> {
         preloadDistance: widget.preloadPagesCount,
         enableBackgroundContent: widget.enableBackgroundContent,
         updateLastSeenPage: widget.updateLastSeenPage,
-        video: VideoModel.fromJson(widget.listData[index]),
+        video: widget.listData[index],
         customVideoInfo: widget.customVideoInfo,
         followWidget: widget.followWidget,
         likeWidget: widget.likeWidget,
